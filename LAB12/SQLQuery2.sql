@@ -1,0 +1,16 @@
+USE master;
+GO
+IF SUSER_ID(N'lab3_user') IS NULL
+BEGIN
+    CREATE LOGIN lab3_user WITH PASSWORD = 'LabUser@2026', CHECK_POLICY = ON;
+END;
+GO
+USE LAB3_MaHoaKhoaCongKhai;
+GO
+IF DATABASE_PRINCIPAL_ID(N'lab3_user') IS NULL
+BEGIN
+    CREATE USER lab3_user FOR LOGIN lab3_user;
+END;
+GO
+GRANT SELECT, INSERT ON OBJECT::dbo.History TO lab3_user;
+GO
